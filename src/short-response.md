@@ -1,6 +1,7 @@
 # Short Responses
 
 For this short response assignment, aim to write a response with the following qualities (your instructor will give you feedback on these areas):
+
 - [] Addresses all parts of the prompt
 - [] Accurately uses relevant technical terminology
 - [] Is free of grammar and spelling mistakes (double check with grammarly!)
@@ -17,6 +18,7 @@ How would you explain to a budding developer what the drawbacks of using factory
 
 ## Response 1
 
+The drawbacks of using **factory functions** are that they **waste memory** by creating new copies of every method for each `object`, while **classes** define methods on their `prototype` so **all instances** share the same methods. Classes also allow for **consistent and predictable** code, better **organization**, and support for `static` and `private` properties and methods.
 
 ---
 
@@ -26,8 +28,7 @@ Explain what factors you should consider when deciding to make a property/method
 
 ## Response 2
 
-
----
+Factors to consider are whether we want this data to be **easily accessed outside of the class** and whether we need to protect the original from being **externally modified**. An example of this would be managing or changing your password on an application or website. It would be unsafe to have any user easily change a password and have access to personal data.
 
 ## Prompt 3
 
@@ -35,7 +36,7 @@ Explain what factors you should consider when deciding to make a property/method
 
 ## Response 3
 
----
+Factors to consider are whether we want this data to be part of the _class_ itself rather than each _instance_, because it will be **the same across all instances**, and whether we want this functionality to **stay consistent** regardless of individual objects. An example of this would be managing the total amount of money across all bank accounts. Normally, we would have to access each instance individually, but we probably don't want each instance to modify the total amount of money in the bank.
 
 ## Prompt 4
 
@@ -56,3 +57,17 @@ class Vault {
 Identify what the mistake is, explain why it is a problem, and suggest a way to fix it.
 
 ## Response 4
+
+The mistake is that the `listSecrets()` method is exposing the private `#secrets` property by **returning a direct reference to it**. This is a problem because it allows external code to modify the internal `#secrets` property, **breaking encapsulation**. To fix it, we can use the spread operator to return a copy of the array instead:
+
+```js
+class Vault {
+  #secrets = [];
+  addSecret(newSecret) {
+    this.#secrets.push(newSecret);
+  }
+  listSecrets() {
+    return [...this.#secrets];
+  }
+}
+```
